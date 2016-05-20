@@ -1,4 +1,4 @@
-<ion-view view-title="已订阅课程">
+<ion-view view-title="我的课程">
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="lesson in myLessons" type="item-text-wrap" href="#/tab/account/detail/{{lesson.id}}">
@@ -6,10 +6,6 @@
         <h2>{{lesson.lessontable_name}}</h2>
         <p>{{lesson.lessontable_description}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
-
-        <ion-option-button class="button-assertive" ng-click="removeCollect(lesson)">
-          取消订阅
-        </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>

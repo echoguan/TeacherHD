@@ -20,13 +20,13 @@ var appCtrl = angular.module('starter.controllers', [])
         return;
       } else {
         // alert("22进来了吗？？！！:");
-        var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/loginConfirm/" + $scope.loginData.username + "/" + $scope.loginData.password;
+        var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/teacherLoginConfirm/" + $scope.loginData.username + "/" + $scope.loginData.password;
         adapterURL = encodeURI(encodeURI(adapterURL));
         var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
         req.send().then(function(resp){
           if(resp.responseText == 'Success'){
             // alert("33进来了吗？？！！:");
-            var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getStudentID/" + $scope.loginData.username;
+            var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getTeacherID/" + $scope.loginData.username;
             adapterURL = encodeURI(encodeURI(adapterURL));
             var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
             req.send().then(function(resp){
@@ -80,7 +80,7 @@ var appCtrl = angular.module('starter.controllers', [])
       } else if($scope.registerData.password != $scope.registerData.repeatPassword) {
         showAlert("注册失败","两次密码不一致！");
       } else {
-        var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/isStudentName/"+ $scope.registerData.username;
+        var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/isTeacherName/"+ $scope.registerData.username;
         adapterURL = encodeURI(encodeURI(adapterURL));
         var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
         req.send().then(function(resp){
@@ -88,7 +88,7 @@ var appCtrl = angular.module('starter.controllers', [])
           if(resp.responseText>0) {
             showAlert("注册失败","该用户名已存在，请重新填写");
           } else {
-            var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/registerStudent/" + $scope.registerData.username + "/" + $scope.registerData.password;
+            var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/registerTeacher/" + $scope.registerData.username + "/" + $scope.registerData.password;
             adapterURL = encodeURI(encodeURI(adapterURL));
             var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
             req.send().then(function(resp){
@@ -227,42 +227,12 @@ var appCtrl = angular.module('starter.controllers', [])
     $scope.userID = Auth.getUserID().userID;
     
     //http://localhost:9080/mfp/api/adapters/JavaSQL/API/getMyCollectLesson/4
-    var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getMyCollectLesson/"+$scope.userID;
+    var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getTeacherLesson/"+$scope.userID;
     var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
     req.send().then(function(resp){
       $scope.myLessons = JSON.parse(resp.responseText);
       // alert("1req-lesson:" + $scope.lessons);
     });
-    
-    
-    showAlert = function (title, message) {
-      var alertPopup = $ionicPopup.alert({
-        title : title,
-        template : message
-      });
-    }
-    
-    //http://localhost:9080/mfp/api/adapters/JavaSQL/API/deleteCollect/2/4
-    $scope.removeCollect = function(lesson) {
-      // alert("取消订阅");
-      $scope.userID = Auth.getUserID().userID;
-      // alert("我要取消订阅它！！"+$scope.userID+"--"+lesson.id);
-      var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/deleteCollect/"+ lesson.id +"/"+ $scope.userID;
-      var req = new WLResourceRequest(adapterURL, WLResourceRequest.DELETE);
-      req.send().then(function(resp){
-        // alert("111resp.status:" + resp.status);
-        if(resp.status == 200){
-          showAlert("成功","取消订阅该课程成功。");
-          var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getMyCollectLesson/"+$scope.userID;
-          var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
-          req.send().then(function(resp){
-            $scope.myLessons = JSON.parse(resp.responseText);
-          });
-        } else {
-          showAlert("失败","取消订阅失败，请重试");
-        }
-      });
-    }
   });
   
   //课程-订阅-公告区控制器
@@ -401,48 +371,6 @@ var appCtrl = angular.module('starter.controllers', [])
       // alert("resp.responseText:" + resp.responseText);
     });
   });
-    
-    
-  //我的提问控制器
-  appCtrl.controller('MyCommentsCtrl', function($scope, $stateParams, MFPInit, Auth) {
-    // alert("MyCommentsCtrl执行");
-    
-    $scope.userID = Auth.getUserID().userID;
-    
-    var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getStudentQuestion/"+$scope.userID;
-    var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
-    req.send().then(function(resp){
-      // alert(JSON.parse(resp.responseText));
-      $scope.questions = JSON.parse(resp.responseText);
-      // alert("1req-lesson:" + $scope.lessons);
-    });
-    
-    $scope.removeQuestion = function(question) {
-      // alert("删除提问" + question.lesson_question_id);
-      $scope.userID = Auth.getUserID().userID;
-      // alert("我要取消订阅它！！"+$scope.userID+"--"+lesson.id);
-      var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/deleteQuestion/" + question.lesson_question_id;
-      var req = new WLResourceRequest(adapterURL, WLResourceRequest.DELETE);
-      req.send().then(function(resp){
-        // alert("111resp.status:" + resp.status);
-        if(resp.status == 200){
-          showAlert("成功","删除该提问成功。");
-          var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/deleteQuestionComment/" + question.lesson_question_id;
-          var req = new WLResourceRequest(adapterURL, WLResourceRequest.DELETE);
-          req.send().then(function(resp){});
-          var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getStudentQuestion/"+$scope.userID;
-            var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
-            req.send().then(function(resp){
-              // alert(JSON.parse(resp.responseText));
-              $scope.questions = JSON.parse(resp.responseText);
-              // alert("1req-lesson:" + $scope.lessons);
-            });
-        } else {
-          showAlert("失败","删除该提问失败，请重试");
-        }
-      });
-    }
-  });
   
   
   //订阅-课程详细页控制器
@@ -453,7 +381,7 @@ var appCtrl = angular.module('starter.controllers', [])
     });
     
     $scope.userID = Auth.getUserID().userID;  
-    var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getMyCollectLesson/"+$scope.userID;
+    var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getTeacherLesson/"+$scope.userID;
     var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
     req.send().then(function(resp){
       $scope.myLessons = JSON.parse(resp.responseText);

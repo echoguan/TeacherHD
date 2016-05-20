@@ -131,17 +131,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     
-    .state('tab.my-comments', {
-      url: '/account/myComments',
-      cache: false, 
-      views: {
-        'tab-account': {
-          templateUrl: 'templates/my-comments.html',
-          controller: 'MyCommentsCtrl'
-        }
-      }
-    })
-    
     
       .state('tab.myCollectLesson-detail', {
         url: '/account/detail/:lessonId',
