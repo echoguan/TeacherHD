@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ibmmobilefirstplatformfoundation">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/ibmmobilefirstplatformfoundation.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

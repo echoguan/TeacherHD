@@ -1,0 +1,23 @@
+<ion-view view-title="注册">
+  <ion-content>
+    <form ng-submit="register()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">用户名</span>
+          <input type="text" ng-model="registerData.username">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">密  码</span>
+          <input type="password" ng-model="registerData.password">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">确认密码</span>
+          <input type="password" ng-model="registerData.repeatPassword">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">注册</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

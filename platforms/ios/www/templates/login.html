@@ -1,0 +1,23 @@
+<ion-view view-title="课程交流学生端">
+  <ion-content class="padding">
+    <form ng-submit="doLogin()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">用户名</span>
+          <input type="text" ng-model="loginData.username">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">密  码</span>
+          <input type="password" ng-model="loginData.password">
+        </label>
+        <label class="item button-bar">
+          <button class="button button-outline button-positive" type="submit">登  录</button>
+          <!--<a class="button button-outline button-balanced" href="#/register">注  册</a>-->
+        </label>
+      </div>
+    </form>
+    <a class="item-note" href="#/register">
+      没有账号？快速注册
+    </a>    
+  </ion-content>
+</ion-view>

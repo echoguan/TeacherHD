@@ -1,0 +1,20 @@
+<ion-view view-title="公告区">
+  <ion-content class="padding">
+    <!--<div class="item item-input-inset">
+        <label class="item-input-wrapper">
+            <input type="text" placeholder="Email">
+        </label>
+        <button class="button button-small">
+            Submit
+        </button>
+    </div>-->
+    <div class="card" ng-repeat="notice in notices">
+        <div class="item item-divider">
+            {{notice.lesson_notice_time}}
+        </div>
+        <div class="item item-text-wrap">
+            {{notice.lesson_notice_description}}
+        </div>
+    </div>
+  </ion-content>
+</ion-view>

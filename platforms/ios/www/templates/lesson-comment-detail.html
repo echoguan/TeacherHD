@@ -1,0 +1,35 @@
+<ion-view view-title="{{question.lesson_question_title}}">
+  <ion-content class="padding">
+      <!--<form ng-submit="addComment()">
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="评论"  ng-model="questionData.comment">
+            </label>
+            <button class="button button-small button-outline button-positive">
+                评论
+            </button>
+        </div>
+      </form>-->
+    <div class="card">
+        <div class="item item-divider">
+            <b>提问学生：</b>{{question.student_name}}
+        </div>
+        <div class="item item-text-wrap">
+            <b>标题：</b>{{question.lesson_question_title}}
+        </div>
+        <div class="item item-text-wrap">
+            <b>描述：</b>{{question.lesson_question_description}}
+        </div>
+        <div class="item-note">
+            {{question.lesson_question_time}}
+        </div>
+    </div>
+    <ion-list>
+        <ion-item ng-repeat="comment in comments">
+            <p>{{comment.teacher_name}}：</p>
+            <div class="item-text-wrap">&nbsp&nbsp&nbsp&nbsp{{comment.question_comment_description}}</div>
+            <p class="item-note">{{comment.question_comment_time}}</p>
+        </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

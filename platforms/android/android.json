@@ -1,0 +1,355 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MFPPushPlugin\"><param name=\"android-package\" value=\"com.ibm.mobilefirstplatform.clientsdk.cordovaplugins.push.CDVMFPPush\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"io.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
+                            "count": 2
+                        },
+                        {
+                            "xml": "<permission android:name=\"com.ibm.ionicmfp.permission.C2D_MESSAGE\" android:protectionLevel=\"signature\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"com.ibm.ionicmfp.permission.C2D_MESSAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"com.google.android.c2dm.permission.RECEIVE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.USE_CREDENTIALS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application/activity": [
+                        {
+                            "xml": "<intent-filter><action android:name=\"com.ibm.ionicmfp.IBMPushNotification\" /><category android:name=\"android.intent.category.DEFAULT\" /></intent-filter>",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<receiver android:exported=\"true\" android:name=\"com.google.android.gms.gcm.GcmReceiver\" android:permission=\"com.google.android.c2dm.permission.SEND\"><intent-filter><action android:name=\"com.google.android.c2dm.intent.RECEIVE\" /><category android:name=\"com.ibm.ionicmfp\" /></intent-filter><intent-filter><action android:name=\"com.google.android.c2dm.intent.REGISTRATION\" /><category android:name=\"com.ibm.ionicmfp\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:exported=\"false\" android:name=\"com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushIntentService\"><intent-filter><action android:name=\"com.google.android.c2dm.intent.RECEIVE\" /></intent-filter></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:exported=\"false\" android:name=\"com.ibm.mobilefirstplatform.clientsdk.android.push.api.MFPPushInstanceIDListenerService\"><intent-filter><action android:name=\"com.google.android.gms.iid.InstanceID\" /></intent-filter></service>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"OkHttpPlugin\"><param name=\"android-package\" value=\"com.google.cordova.OkHttpPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WLInitializationPlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLInitializationPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"LoggerPlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.LoggerPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WLApp\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLApp\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NativePage\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.NativePage\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SecurityPlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.SecurityPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkDetector\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.NetworkDetector\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"DeviceAuth\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.DeviceAuthPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WifiPlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WifiPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FIPSHttpPlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.FIPSHttpPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WLCustomDialog\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLCustomDialog\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLNetworkManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WLSplashScreen\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLSplashScreenPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WLAuthorizationManagerPlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLAuthorizationManagerPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WLDirectUpdatePlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLDirectUpdatePlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WLNativeXHRPlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLNativeXHRPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WLActionSenderPlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLActionSenderPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"WLCertificatePinningPlugin\"><param name=\"android-package\" value=\"com.worklight.androidgap.plugin.WLCertificatePinningPlugin\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-okhttp": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-mfp": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-mfp-push": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ibm.ionicmfp"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+            "id": "cordova-plugin-camera.Camera",
+            "clobbers": [
+                "Camera"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+            "id": "cordova-plugin-camera.CameraPopoverOptions",
+            "clobbers": [
+                "CameraPopoverOptions"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-camera/www/Camera.js",
+            "id": "cordova-plugin-camera.camera",
+            "clobbers": [
+                "navigator.camera"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
+            "id": "cordova-plugin-camera.CameraPopoverHandle",
+            "clobbers": [
+                "CameraPopoverHandle"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-device/www/device.js",
+            "id": "cordova-plugin-device.device",
+            "clobbers": [
+                "device"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+            "id": "cordova-plugin-dialogs.notification",
+            "merges": [
+                "navigator.notification"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+            "id": "cordova-plugin-dialogs.notification_android",
+            "merges": [
+                "navigator.notification"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+            "id": "cordova-plugin-globalization.GlobalizationError",
+            "clobbers": [
+                "window.GlobalizationError"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+            "id": "cordova-plugin-globalization.globalization",
+            "clobbers": [
+                "navigator.globalization"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-mfp/bootstrap.js",
+            "id": "cordova-plugin-mfp.mfp",
+            "runs": true
+        },
+        {
+            "file": "plugins/cordova-plugin-mfp-push/www/MFPPush.js",
+            "id": "cordova-plugin-mfp-push.MFPPush",
+            "clobbers": [
+                "MFPPush"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "clobbers": [
+                "navigator.splashscreen"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+            "id": "cordova-plugin-statusbar.statusbar",
+            "clobbers": [
+                "window.StatusBar"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-whitelist/whitelist.js",
+            "id": "cordova-plugin-whitelist.whitelist",
+            "runs": true
+        },
+        {
+            "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+            "id": "ionic-plugin-keyboard.keyboard",
+            "clobbers": [
+                "cordova.plugins.Keyboard"
+            ],
+            "runs": true
+        }
+    ],
+    "plugin_metadata": {
+        "cordova-plugin-camera": "2.1.1",
+        "cordova-plugin-console": "1.0.2",
+        "cordova-plugin-device": "1.1.1",
+        "cordova-plugin-dialogs": "1.2.0",
+        "cordova-plugin-globalization": "1.0.3",
+        "cordova-plugin-okhttp": "2.0.0",
+        "cordova-plugin-mfp": "8.0.2016032800",
+        "cordova-plugin-mfp-push": "8.0.2016040600",
+        "cordova-plugin-splashscreen": "3.2.1",
+        "cordova-plugin-statusbar": "2.1.2",
+        "cordova-plugin-whitelist": "1.2.1",
+        "ionic-plugin-keyboard": "2.0.1"
+    }
+}

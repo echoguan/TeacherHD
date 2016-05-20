@@ -1,0 +1,22 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{lesson.lessontable_name}}">
+  <ion-content class="padding">
+    <img ng-src="img/ben.png" style="width: 64px; height: 64px">
+    <p><b>课程描述：</b>{{lesson.lessontable_description}}</p>
+    <p><b>关键字：</b>{{lesson.lessontable_key}}</p>
+    <p><b>任课教师：</b>{{lesson.teacher_name}}</p>
+    <a class="item item-icon-left" href="#/tab/lessons/notice/{{lesson.id}}">
+      <i class="icon ion-ios-book"></i>
+      公告区
+    </a>
+    <a class="item item-icon-left" href="#/tab/lessons/comment/{{lesson.id}}">
+      <i class="icon ion-ios-chatboxes"></i>
+      提问区
+    </a>
+  </ion-content>
+</ion-view>
