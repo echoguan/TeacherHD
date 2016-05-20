@@ -251,51 +251,8 @@ var appCtrl = angular.module('starter.controllers', [])
   });
   
   //课程-订阅-提问区控制器
-  appCtrl.controller('LessonCommentCtrl', function($scope, $stateParams, MFPInit, Auth, $ionicPopup) {
+  appCtrl.controller('LessonCommentCtrl', function($scope, $stateParams, MFPInit) {
     // alert("LessonCommentCtrl执行");
-
-    // alert("parseInt($stateParams.lessonId):" + parseInt($stateParams.lessonId));
-    
-    showAlert = function (title, message) {
-      var alertPopup = $ionicPopup.alert({
-        title : title,
-        template : message
-      });
-    }
-
-    $scope.questionData = {};
-    $scope.userID = Auth.getUserID().userID;
-    
-    $scope.addQuestion = function(){
-      // alert("提问：" + $scope.questionData.title +"-"+ $scope.questionData.description +"-"+ $scope.userID +"-"+ parseInt($stateParams.lessonId));
-      
-      //http://localhost:9080/mfp/api/adapters/JavaSQL/API/addQuestion/
-      if( !angular.isDefined($scope.questionData.title) || !angular.isDefined($scope.questionData.description) || $scope.questionData.title.trim() == "" || $scope.questionData.description.trim() == "") {
-        showAlert("失败","问题标题或描述不能为空！");
-        return;
-      } else {
-        var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/addQuestion/"+ parseInt($stateParams.lessonId) +"/"+ $scope.userID +"/"+ $scope.questionData.title +"/"+ $scope.questionData.description;
-        adapterURL = encodeURI(encodeURI(adapterURL));
-        var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
-        // alert("adapterURL" + adapterURL);
-        req.send().then(function(resp){
-            // alert("111resp.status:" + resp.status);
-            if(resp.status == 200){
-              showAlert("成功","您已提问成功！");
-              $scope.questionData.title = null;
-              $scope.questionData.description = null;
-              var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getLessonQuestion/"+parseInt($stateParams.lessonId);
-              var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
-              req.send().then(function(resp){
-                $scope.questions = JSON.parse(resp.responseText);
-                // alert("1req-lesson:" + $scope.lessons);
-              });
-            } else {
-              showAlert("失败","提问失败，请重试！");
-            }
-        });
-      }
-    }
     
     // http://localhost:9080/mfp/api/adapters/JavaSQL/API/getLessonQuestion/1
     var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getLessonQuestion/"+parseInt($stateParams.lessonId);
@@ -312,48 +269,47 @@ var appCtrl = angular.module('starter.controllers', [])
 
     // alert("parseInt($stateParams.questionId):" + parseInt($stateParams.questionId));
     
-    // showAlert = function (title, message) {
-    //   var alertPopup = $ionicPopup.alert({
-    //     title : title,
-    //     template : message
-    //   });
-    // }
+    showAlert = function (title, message) {
+      var alertPopup = $ionicPopup.alert({
+        title : title,
+        template : message
+      });
+    }
 
-    // $scope.questionData = {};
-    // $scope.userID = Auth.getUserID().userID;
+    $scope.questionData = {};
+    $scope.userID = Auth.getUserID().userID;
     
-    // $scope.addComment = function(){
-    //   // alert("111111111" + $scope.questionData.comment);
-    //   // alert("提问：" + $scope.questionData.title +"-"+ $scope.questionData.description +"-"+ $scope.userID +"-"+ parseInt($stateParams.lessonId));
+    $scope.addComment = function(){
+      // alert("111111111" + $scope.questionData.comment);
+      // alert("提问：" + $scope.questionData.title +"-"+ $scope.questionData.description +"-"+ $scope.userID +"-"+ parseInt($stateParams.lessonId));
       
-    //   //http://localhost:9080/mfp/api/adapters/JavaSQL/API/addQuestion/
-    //   if( !angular.isDefined($scope.questionData.comment) || $scope.questionData.comment.trim() == "") {
-    //     showAlert("失败","问题标题或描述不能为空！");
-    //     return;
-    //   } else {
-    //     alert("加评论吧");
-    //     // var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/addQuestion/"+ parseInt($stateParams.lessonId) +"/"+ $scope.userID +"/"+ $scope.questionData.title +"/"+ $scope.questionData.description;
-    //     // adapterURL = encodeURI(encodeURI(adapterURL));
-    //     // var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
-    //     // // alert("adapterURL" + adapterURL);
-    //     // req.send().then(function(resp){
-    //     //     // alert("111resp.status:" + resp.status);
-    //     //     if(resp.status == 200){
-    //     //       showAlert("成功","您已提问成功！");
-    //     //       $scope.questionData.title = null;
-    //     //       $scope.questionData.description = null;
-    //     //       var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getLessonQuestion/"+parseInt($stateParams.lessonId);
-    //     //       var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
-    //     //       req.send().then(function(resp){
-    //     //         $scope.questions = JSON.parse(resp.responseText);
-    //     //         // alert("1req-lesson:" + $scope.lessons);
-    //     //       });
-    //     //     } else {
-    //     //       showAlert("失败","提问失败，请重试！");
-    //     //     }
-    //     // });
-    //   }
-    // }
+      //http://localhost:9080/mfp/api/adapters/JavaSQL/API/addQuestion/
+      if( !angular.isDefined($scope.questionData.comment) || $scope.questionData.comment.trim() == "") {
+        showAlert("失败","评论内容不能为空！");
+        return;
+      } else {
+        // alert("加评论吧");
+        var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/addComment/"+ parseInt($stateParams.questionId) +"/"+ $scope.userID +"/"+ $scope.questionData.comment;
+        adapterURL = encodeURI(encodeURI(adapterURL));
+        var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
+        // alert("adapterURL" + adapterURL);
+        req.send().then(function(resp){
+            // alert("111resp.status:" + resp.status);
+            if(resp.status == 200){
+              showAlert("成功","您已评论成功！");
+              $scope.questionData.comment = null;
+              var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getQuestionComment/"+parseInt($stateParams.questionId);
+              var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
+              req.send().then(function(resp){
+                $scope.comments = JSON.parse(resp.responseText);
+                // alert("resp.responseText:" + resp.responseText);
+              });
+            } else {
+              showAlert("失败","评论失败，请重试！");
+            }
+        });
+      }
+    }
     
     //http://localhost:9080/mfp/api/adapters/JavaSQL/API/getOneQuestion/1
     var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getOneQuestion/"+parseInt($stateParams.questionId);
