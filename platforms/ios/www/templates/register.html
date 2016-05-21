@@ -1,5 +1,5 @@
 <ion-view view-title="注册">
-  <ion-content>
+  <ion-content class="padding">
     <form ng-submit="register()">
       <div class="list">
         <label class="item item-input">
@@ -14,8 +14,8 @@
           <span class="input-label">确认密码</span>
           <input type="password" ng-model="registerData.repeatPassword">
         </label>
-        <label class="item">
-          <button class="button button-block button-energized" type="submit">注册</button>
+        <label class="item button-bar">
+          <button class="button button-outline button-energized" type="submit">注册</button>
         </label>
       </div>
     </form>
