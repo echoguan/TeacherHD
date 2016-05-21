@@ -4,14 +4,10 @@
     {{lessons[0].lessontable_name}}-->
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="lesson in lessons" type="item-text-wrap" href="#/tab/lessons/detail/{{lesson.id}}">
-        <img ng-src="img/ben.png">
+        <img ng-src="img/college_3d.png">
         <h2>{{lesson.lessontable_name}}</h2>
         <p>{{lesson.lessontable_description}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
-
-        <ion-option-button class="button-assertive" ng-click="addFavorite(lesson)">
-          订阅
-        </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>

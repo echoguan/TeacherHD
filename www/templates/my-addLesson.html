@@ -1,0 +1,23 @@
+<ion-view view-title="添加课程">
+  <ion-content class="padding">
+    <form ng-submit="addLesson()">
+        <div class="list item-button-right">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">课程标题</span>
+                <input type="text" placeholder="请输入课程标题"  ng-model="lessonData.title">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">课题描述</span>
+                <input type="text" placeholder="请输入课题描述"  ng-model="lessonData.description">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">课题关键字</span>
+                <input type="text" placeholder="请输入课题关键字"  ng-model="lessonData.key">
+            </label>
+            <button class="button button-clear button-energized" type="submit">
+                添加
+            </button>
+        </div>
+    </form>
+  </ion-content>
+</ion-view>

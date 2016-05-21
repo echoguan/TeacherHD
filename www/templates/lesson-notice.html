@@ -1,13 +1,15 @@
 <ion-view view-title="公告区">
   <ion-content class="padding">
-    <!--<div class="item item-input-inset">
-        <label class="item-input-wrapper">
-            <input type="text" placeholder="Email">
-        </label>
-        <button class="button button-small">
-            Submit
-        </button>
-    </div>-->
+      <form ng-submit="addNotice()">
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="公告"  ng-model="noticeData.notice">
+            </label>
+            <button class="button button-small button-outline button-energized">
+                发布
+            </button>
+        </div>
+      </form>
     <div class="card" ng-repeat="notice in notices">
         <div class="item item-divider">
             {{notice.lesson_notice_time}}

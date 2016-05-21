@@ -131,6 +131,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     
+    .state('tab.my-addLesson', {
+      url: '/account/addLesson',
+      cache: false, 
+      views: {
+        'tab-account': {
+          templateUrl: 'templates/my-addLesson.html',
+          controller: 'AddLessonCtrl'
+        }
+      }
+    })
+    
     
       .state('tab.myCollectLesson-detail', {
         url: '/account/detail/:lessonId',

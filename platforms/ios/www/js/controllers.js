@@ -224,7 +224,36 @@ var appCtrl = angular.module('starter.controllers', [])
       MFPInit.then(function() { WL.Analytics.log({ AppView: 'My Lessons' }, "visit My Lessons view"); console.log("my lessons view enter") });
     });
     
+    showAlert = function (title, message) {
+      var alertPopup = $ionicPopup.alert({
+        title : title,
+        template : message
+      });
+    }
+    
     $scope.userID = Auth.getUserID().userID;
+    
+    $scope.removeLesson = function(lesson) {
+      // alert("删除课程");
+      $scope.userID = Auth.getUserID().userID;
+      // alert("我要取消订阅它！！"+$scope.userID+"--"+lesson.id);
+      var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/deleteLesson/"+ lesson.id;
+      var req = new WLResourceRequest(adapterURL, WLResourceRequest.DELETE);
+      req.send().then(function(resp){
+        // alert("111resp.status:" + resp.status);
+        if(resp.status == 200){
+          showAlert("成功","删除该课程成功。");
+          var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getTeacherLesson/"+$scope.userID;
+          var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
+          req.send().then(function(resp){
+            $scope.myLessons = JSON.parse(resp.responseText);
+            // alert("1req-lesson:" + $scope.lessons);
+          });
+        } else {
+          showAlert("失败","删除课程失败，请重试");
+        }
+      });
+    }
     
     //http://localhost:9080/mfp/api/adapters/JavaSQL/API/getMyCollectLesson/4
     var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getTeacherLesson/"+$scope.userID;
@@ -236,10 +265,52 @@ var appCtrl = angular.module('starter.controllers', [])
   });
   
   //课程-订阅-公告区控制器
-  appCtrl.controller('NoticeCtrl', function($scope, $stateParams, MFPInit) {
+  appCtrl.controller('NoticeCtrl', function($scope, $stateParams, MFPInit, Auth, $ionicPopup) {
     // alert("NoticeCtrl执行");
 
     // alert("parseInt($stateParams.lessonId):" + parseInt($stateParams.lessonId));
+    
+    showAlert = function (title, message) {
+      var alertPopup = $ionicPopup.alert({
+        title : title,
+        template : message
+      });
+    }
+
+    $scope.noticeData = {};
+    $scope.userID = Auth.getUserID().userID;
+    
+    $scope.addNotice = function(){
+      // alert("111111111" + $scope.questionData.comment);
+      // alert("提问：" + $scope.questionData.title +"-"+ $scope.questionData.description +"-"+ $scope.userID +"-"+ parseInt($stateParams.lessonId));
+      
+      //http://localhost:9080/mfp/api/adapters/JavaSQL/API/addQuestion/
+      if( !angular.isDefined($scope.noticeData.notice) || $scope.noticeData.notice.trim() == "") {
+        showAlert("失败","公告内容不能为空！");
+        return;
+      } else {
+        // alert("加评论吧");
+        var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/addNotice/"+ parseInt($stateParams.lessonId) +"/"+ $scope.userID +"/"+ $scope.noticeData.notice;
+        adapterURL = encodeURI(encodeURI(adapterURL));
+        var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
+        // alert("adapterURL" + adapterURL);
+        req.send().then(function(resp){
+            // alert("111resp.status:" + resp.status);
+            if(resp.status == 200){
+              showAlert("成功","公告发布成功！");
+              $scope.noticeData.notice = null;
+              var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getLessonNotice/"+parseInt($stateParams.lessonId);
+              var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
+              req.send().then(function(resp){
+                $scope.notices = JSON.parse(resp.responseText);
+                // alert("1req-lesson:" + $scope.lessons);
+              });
+            } else {
+              showAlert("失败","公告发布失败，请重试！");
+            }
+        });
+      }
+    }
     
     //http://localhost:9080/mfp/api/adapters/JavaSQL/API/getLessonNotice/1
     var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/getLessonNotice/"+parseInt($stateParams.lessonId);
@@ -326,6 +397,64 @@ var appCtrl = angular.module('starter.controllers', [])
       $scope.comments = JSON.parse(resp.responseText);
       // alert("resp.responseText:" + resp.responseText);
     });
+  });
+  
+  //我的提问控制器
+  appCtrl.controller('AddLessonCtrl', function($scope, $stateParams, MFPInit, Auth, $ionicPopup,$state) {
+    // alert("AddLessonCtrl执行");
+    
+    showAlert = function (title, message) {
+      var alertPopup = $ionicPopup.alert({
+        title : title,
+        template : message
+      });
+    }
+
+    $scope.lessonData = {};
+    $scope.userID = Auth.getUserID().userID;
+    
+    $scope.addLesson = function(){
+      // alert("添加课程");
+      
+      // alert("参数：" + $scope.lessonData.title +"-"+ $scope.lessonData.description +"-"+ $scope.lessonData.key +"-"+ $scope.userID);
+      
+      if( !angular.isDefined($scope.lessonData.title) || !angular.isDefined($scope.lessonData.description) || $scope.lessonData.title.trim() == "" || $scope.lessonData.description.trim() == "" || !angular.isDefined($scope.lessonData.key) || $scope.lessonData.key.trim() == "") {
+        showAlert("提醒","不能有空项！");
+        return;
+      } else {
+        var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/isLessonName/"+ $scope.lessonData.title;
+        adapterURL = encodeURI(encodeURI(adapterURL));
+        var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
+        req.send().then(function(resp){
+          // alert("resp.responseText:" + resp.responseText);
+          if(resp.responseText>0) {
+            showAlert("注册失败","该用户名已存在，请重新填写");
+          } else {
+            var adapterURL = "http://localhost:9080/mfp/api/adapters/JavaSQL/API/addLesson/"+ $scope.lessonData.title +"/"+ $scope.lessonData.description +"/"+ $scope.lessonData.key +"/"+ $scope.userID;
+            adapterURL = encodeURI(encodeURI(adapterURL));
+            var req = new WLResourceRequest(adapterURL, WLResourceRequest.GET);
+            // alert("adapterURL" + adapterURL);
+            req.send().then(function(resp){
+                // alert("111resp.status:" + resp.status);
+                if(resp.status == 200){
+                  showAlert("成功","课程已经发布成功！");
+                  $scope.lessonData.title = null;
+                  $scope.lessonData.description = null;
+                  $scope.lessonData.key = null;
+                  $state.go('tab.account', null, {
+                    reload: true
+                  });
+                } else {
+                  showAlert("失败","课程发布失败，请重试！");
+                }
+            }); 
+          }
+          
+        }); 
+        
+      }
+    }
+    
   });
   
   
